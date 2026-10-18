@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DemandForge AI Importer</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <div>
+          <h1>DemandForge AI</h1>
+          <p>Authorised import only</p>
+        </div>
+      </div>
+      <span id="connection-badge" class="badge" data-state="unknown">Not connected</span>
+    </header>
+
+    <main class="main">
+      <details id="settings-panel" class="panel" open>
+        <summary>Connection settings</summary>
+        <form id="settings-form" class="form">
+          <label for="api-base-url">Dashboard URL</label>
+          <input id="api-base-url" type="url" placeholder="https://your-app.vercel.app" required />
+          <label for="api-token">Extension token</label>
+          <input id="api-token" type="password" placeholder="df_…" autocomplete="off" required />
+          <p class="hint">
+            Create a token in DemandForge under Settings → Integrations. It is stored locally in this browser
+            profile.
+          </p>
+          <div class="actions">
+            <button id="save-settings" type="submit" class="button">Save and connect</button>
+          </div>
+          <p id="settings-status" class="status" role="status"></p>
+        </form>
+      </details>
+
+      <section class="panel">
+        <h2>Import a post</h2>
+        <p class="hint">
+          Open a post you are allowed to read, then capture it. The extension reads only the active tab, only
+          when you click.
+        </p>
+        <div class="actions">
+          <button id="capture" type="button" class="button button--secondary">
+            Capture post from this tab
+          </button>
+        </div>
+        <p id="capture-status" class="status" role="status"></p>
+
+        <form id="import-form" class="form">
+          <label for="post-url">Post URL</label>
+          <input id="post-url" type="url" placeholder="https://www.facebook.com/…" />
+          <label for="post-text">Post text</label>
+          <textarea id="post-text" rows="9" maxlength="20000" required></textarea>
+          <div class="row">
+            <label class="checkbox">
+              <input id="auto-analyze" type="checkbox" checked />
+              Queue Gemini analysis
+            </label>
+          </div>
+          <p id="rule-hint" class="hint"></p>
+          <div class="actions">
+            <button id="import" type="submit" class="button">Import lead</button>
+          </div>
+          <p id="import-status" class="status" role="status"></p>
+        </form>
+      </section>
+
+      <footer class="footer">
+        <p>
+          You are responsible for having permission to view and use this content. The extension never bypasses
+          logins, private groups, CAPTCHAs, or rate limits.
+        </p>
+        <div id="rules" class="rules" aria-live="polite"></div>
+      </footer>
+    </main>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
