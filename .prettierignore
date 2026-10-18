@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+build
+coverage
+playwright-report
+test-results
+extension/dist
+pnpm-lock.yaml
+public
+.env*
+!.env.example
